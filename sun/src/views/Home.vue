@@ -24,10 +24,10 @@ export default {
     this.setEcharts(regNum, this.options)
     this.getusersList()
 
-    let para = {}
-    goods(para).then((res) => {
-      console.log(res)
-    })
+    // let para = {}
+    // goods(para).then((res) => {
+    //   console.log(res)
+    // })
   },
   methods: {
     /**

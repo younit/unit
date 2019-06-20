@@ -19,13 +19,13 @@ onerror(app)
 app.use(cors({
   origin: function (ctx) {
     console.log(ctx)
-        if (ctx.url === '/goods') {
-            return "*"; // 允许来自所有域名请求
-        }
-        return 'http://localhost:8080';
-    },
-    methods:['GET','POST'],
-    allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+		if (ctx.url === '/goods') {
+			return "*"; // 允许来自所有域名请求
+		}
+		return 'http://localhost:8080';
+	},
+	methods:['GET','POST'],
+	allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }))
 /**
 *    另一种写法
@@ -45,6 +45,7 @@ app.use(views(__dirname + '/views', {
 
 // logger
 app.use(async (ctx, next) => {
+  // ctx.set("Access-Control-Allow-Origin", "*")
   ctx.set("Access-Control-Allow-Origin", "http://localhost:8080")
   // ctx.set("Access-Control-Allow-Headers", "X-Requested-With")
   ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
