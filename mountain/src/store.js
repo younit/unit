@@ -7,23 +7,23 @@ export default new Vuex.Store({
   state: {
     menuList: [ //  左侧导航列表
       {
-        id: '1',
+        id: 'home',
         name: '主面板',
         path: 'home',
         hasChild: false,
         icon: 'el-icon-s-platform',
       },
       {
-        id: '2',
+        id: 'city',
         name: '城市管理',
         path: 'city',
         hasChild: true,
         icon: 'el-icon-office-building',
         childrenList: [
           {
-            id: '2-1',
-            name: '上海',
-            path: 'shanghai',
+            id: 'city',
+            name: '城市列表',
+            path: 'city',
           },
         ]
       },

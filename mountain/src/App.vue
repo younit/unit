@@ -41,4 +41,7 @@
 .el-menu {
   border-right none !important 
 }
+.marginbtm30 {
+  margin-bottom 30px
+}
 </style>

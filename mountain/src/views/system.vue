@@ -46,7 +46,7 @@ export default {
           },
         ]
       },
-      users: { //  用户信息
+      list: { //  用户信息
         data: [], //  数据
         total: 0 //  总数
       }
@@ -62,7 +62,7 @@ export default {
       let os = this.$echarts.init(document.getElementById('online'), 'dark')
       os.setOption(this.options)
     },
-    getuserslist () {
+    getuserslist () { //  查询用户列表
       let para
       userslist(para).then(data => {
         console.log(data)
@@ -70,8 +70,8 @@ export default {
         if (code !== 200) {
           this.$message.error(msg)
         } else {
-          this.users.data = res
-          this.users.total = total
+          this.list.data = res
+          this.list.total = total
         }
       })
     }
@@ -81,7 +81,7 @@ export default {
 
 <style lang="stylus" scoped>
   #online {
-    width 100%
+    width 500px
     height 400px
   }
 </style>

@@ -10,5 +10,5 @@ export const userslogin = params => { return axios.post(`${ base }/users/login`,
 
 //  用户列表
 export const userslist = params => { return axios.get(`${base}/users`, { params: params }) }
-
-export const goods = params => { return axios.get(`${base}/goods`, { params: params }) }
+//  城市列表
+export const cityslist = params => { return axios.get(`${base}/citys`, { params: params }) }

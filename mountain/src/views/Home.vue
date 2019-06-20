@@ -1,19 +1,19 @@
 <template>
   <div class="home">
     <head-item></head-item>
-      <div class="flexstart">
-        <div>
+    <el-row>
+      <el-col :span="4">
           <nav-item></nav-item>
-        </div>
+      </el-col>
+      <el-col :span="20" class="content">
         <!-- <keep-alive >
             <router-view class="app-router-view"  v-if="$route.meta.keepAlive"></router-view>
         </keep-alive> -->
-        <div>
-          <transition name="move-fade-right-to-left">
-            <router-view class="app-router-view"></router-view>
-          </transition>
-        </div>
-      </div>
+        <transition name="move-fade-right-to-left">
+          <router-view class="app-router-view"></router-view>
+        </transition>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -29,3 +29,9 @@ export default {
   }
 }
 </script>
+<style lang="stylus" scoped>
+.content {
+  padding 30px
+}
+</style>
+

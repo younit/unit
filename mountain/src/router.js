@@ -17,24 +17,24 @@ export default new Router({
     },
     {
       path: '/home',
-      name: 'home',
+      name: 'system',
       component: () => import('./views/Home.vue'),
       children: [
         {
           path: '/home',
-          name: 'system',
+          name: 'home',
           component: () => import('./views/system.vue')
         }
       ]
     },
     {
-      path: '/shanghai',
-      name: 'city',
+      path: '/city',
+      name: 'citys',
       component: () => import('./views/Home.vue'),
       children: [
         {
-          path: '/shanghai',
-          name: 'shanghai',
+          path: '/city',
+          name: 'city',
           component: () => import('./views/city.vue')
         }
       ]
