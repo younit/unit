@@ -44,4 +44,8 @@
 .marginbtm30 {
   margin-bottom 30px
 }
+.el-form-item__content { //  输入框样式
+  display inline-block !important
+  margin-left 10px !important
+}
 </style>

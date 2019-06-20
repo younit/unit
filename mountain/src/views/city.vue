@@ -63,6 +63,15 @@
           </template>
         </el-table-column>
       </el-table>
+      <div class="txtcenter">
+        <el-pagination
+          background
+          layout="total, prev, pager, next"
+          @current-change="(value) => {return handleSearch('pagination', value)}"
+          :current-page="para.pageIndex"
+          :total="list.total">
+        </el-pagination>
+      </div>
      </template>
 
     <el-dialog
@@ -72,7 +81,41 @@
       :center="dialogCfg.center"
       :fullscreen="dialogCfg.fullscreen"
       >
-      <span>这是一段信息</span>
+
+      <el-form :model="form" :rules="rules" :label-width="rules.width">
+        <el-form-item label="城市" prop="city">
+          <el-select v-model="form.city" placeholder="请选择" >
+            <el-option
+              v-for="item in getcitys"
+              :key="item.key"
+              :label="item.name"
+              :value="item.name">
+            </el-option>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="景点名称" prop="name" :label-width="rules.width">
+          <el-input v-model="form.name"></el-input>
+        </el-form-item>
+
+        <el-form-item label="成人票" prop="adultTicket" :label-width="rules.width">
+          <el-input v-model.number="form.adultTicket"></el-input>
+        </el-form-item>
+
+        <el-form-item label="儿童票" prop="childTicket" :label-width="rules.width">
+          <el-input v-model.number="form.childTicket"></el-input>
+        </el-form-item>
+
+        <el-form-item label="开门时间" prop="openingTime" :label-width="rules.width">
+          <el-input v-model.number="form.openingTime"></el-input>
+        </el-form-item>
+
+        <el-form-item label="关门时间" prop="closingTime" :label-width="rules.width">
+          <el-input v-model.number="form.closingTime"></el-input>
+        </el-form-item>
+
+      </el-form>
+
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogCfg.dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="handleSuccess()">确 定</el-button>
@@ -83,6 +126,7 @@
 </template>
 <script>
 import { cityslist } from '../api'
+import { mapGetters } from 'vuex'
 export default {
   name: 'system',
   data () {
@@ -96,19 +140,34 @@ export default {
       dialogCfg: { //  弹出框配置
         title: '', //  标题
         dialogVisible: false, //  显示隐藏弹出框
-        width: '50%', //  宽度
+        width: '30%', //  宽度
         center: true, //  是否居中
         fullscreen: false, //  是否全屏
+      },
+      rules: {
+        width: '100px',
+        city: [{ required: true, message: '请选择城市', trigger: 'change' }],
+        name: [{ required: true, message: '请输入景点名称', trigger: 'blur' },],
+        adultTicket: [{ required: true, message: '请输入成人票价格', trigger: 'blur' }, { type: 'number', message: '必须为数字值'}],
+        childTicket: [{ required: true, message: '请输入儿童票价格', trigger: 'blur' }, { type: 'number', message: '必须为数字值'}],
+        openingTime: [{ required: true, message: '请输入开始时间', trigger: 'blur' },],
+        closingTime: [{ required: true, message: '请输入结束', trigger: 'blur' },],
+      }, //  规则
+      para: { //  查询条件
+        pageIndex: 1,
+        pageSize: 10,
       }
     }
+  },
+  computed: {
+    ...mapGetters(['getcitys'])
   },
   mounted() {
     this.getlist()
   },
   methods: {
     getlist () { //  查询用户列表
-      let para
-      cityslist(para).then(res => {
+      cityslist(this.para).then(res => {
         console.log(res)
         let { code, msg, data, total } = res.data
         if (code !== 200) {
@@ -125,6 +184,7 @@ export default {
       this.currentSetSts = obj //  设置当前操作状态
       switch (obj) {
         case 'add': //  添加
+          this.dialogCfg.title = '添加'
           this.dialogCfg.dialogVisible = true
           break
         case 'edit': //  编辑
@@ -133,9 +193,10 @@ export default {
           break
       }
     },
-    handleSuccess (sts) {
+    handleSuccess () {
       switch (this.currentSetSts) {
         case 'add': //  添加
+          this.dialogCfg.dialogVisible = false
           break
         case 'edit': //  编辑
           break

@@ -27,11 +27,19 @@ export default new Vuex.Store({
           },
         ]
       },
+    ],
+    citys: [
+      {
+        name: '上海'
+      }
     ]
   },
   getters: {
     getmenuList: (state) => {
       return state.menuList
+    },
+    getcitys: (state) => {
+      return state.citys
     },
   },
   mutations: {
