@@ -9,18 +9,18 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.prototype.$echarts = echarts
 
-// router.beforeEach((to, from, next) => { //  登入之前检测
-//   if (to.path === '/login') {
-//     sessionStorage.removeItem('user')
-//   }
-//   // let user = JSON.parse(sessionStorage.getItem('user'))
-//   let user = sessionStorage.getItem('user')
-//   if (!user && to.path !== '/login') {
-//     next({ path: '/login' })
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => { //  登入之前检测
+  if (to.path === '/login') {
+    sessionStorage.removeItem('user')
+  }
+  // let user = JSON.parse(sessionStorage.getItem('user'))
+  let user = sessionStorage.getItem('user')
+  if (!user && to.path !== '/login') {
+    next({ path: '/login' })
+  } else {
+    next()
+  }
+})
 
 new Vue({
   router,

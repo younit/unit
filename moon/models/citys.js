@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const citysSchema = new Schema({
+  "city": String, //  城市
   'name': String, //  名字
   'hot': Number,  //  热度
   'rank': Number, //  排名
@@ -13,6 +14,5 @@ const citysSchema = new Schema({
   'hasTickets': Boolean, //  是否有票
   "address": String, //  地址
   "phone": Number, //  电话
-  "city": String, //  城市
 })
 module.exports = mongoose.model('citys', citysSchema)
