@@ -6,7 +6,8 @@ const citys = require('../models/citys')
 
 router.prefix('/citys')
 
-mongoose.connect('mongodb://127.0.0.1:27017/koa', { useNewUrlParser:true })
+// mongoose.connect('mongodb://127.0.0.1:27017/koa', { useNewUrlParser:true })
+mongoose.connect('mongodb://sea:sea@47.103.147.50:27017/sea', { useNewUrlParser:true })
 
 
 router.get('/', async (ctx, next) => {
@@ -32,7 +33,7 @@ router.get('/', async (ctx, next) => {
   }
 })
 
-router.post('/add', async (ctx, next) => { //  添加景点
+function citysmodel (ctx) {
   let para = {
     "city": ctx.request.body.city, //  城市
     'name': ctx.request.body.name, //  名字
@@ -47,8 +48,12 @@ router.post('/add', async (ctx, next) => { //  添加景点
     "address": null, //  地址
     "phone": null, //  电话
   }
+  return para
+}
+
+router.post('/add', async (ctx, next) => { //  添加景点
+  let para = citysmodel(ctx)
   let res  = await citys.create(para)
-  console.log(res)
   if (res) {
     ctx.response.body = {
       code: 200,
@@ -64,20 +69,7 @@ router.post('/add', async (ctx, next) => { //  添加景点
 
 router.post('/edit', async (ctx, next) => { //  修改景点
   let where = {'_id': ctx.request.body.id}
-  let para = {
-    "city": ctx.request.body.city, //  城市
-    'name': ctx.request.body.name, //  名字
-    'hot': null,  //  热度
-    'rank': null, //  排名
-    'score': null, //  评分
-    'adultTicket': ctx.request.body.adultTicket, //  成人票
-    'childTicket': ctx.request.body.childTicket, //  儿童票
-    'openingTime': ctx.request.body.openingTime, //  开门时间
-    'closingTime': ctx.request.body.closingTime, //  关门时间
-    'hasTickets': true, //  是否有票
-    "address": null, //  地址
-    "phone": null, //  电话
-  }
+  let para = citysmodel(ctx)
   let res  = await citys.update(where, para)
   console.log(res)
   if (res) {

@@ -2,7 +2,8 @@ const router = require('koa-router')()
 const mongoose = require('mongoose')
 const users = require('../models/users')
 router.prefix('/users')
-mongoose.connect('mongodb://127.0.0.1:27017/koa', { useNewUrlParser:true })
+// mongoose.connect('mongodb://127.0.0.1:27017/koa', { useNewUrlParser:true })
+mongoose.connect('mongodb://sea:sea@47.103.147.50:27017/sea', { useNewUrlParser:true })
 
 router.get('/', async (ctx, next) => { //  查询用户列表
   let res = await users.find()

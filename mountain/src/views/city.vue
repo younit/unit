@@ -39,11 +39,11 @@
         </el-table-column>
 
         <el-table-column label="开门时间">
-          <template slot-scope="scope">{{ 'AM: ' + scope.row.openingTime }}</template>
+          <template slot-scope="scope">{{ scope.row.openingTime }}</template>
         </el-table-column>
 
         <el-table-column label="关门时间">
-          <template slot-scope="scope">{{ 'PM: ' +scope.row.closingTime }}</template>
+          <template slot-scope="scope">{{ scope.row.closingTime }}</template>
         </el-table-column>
 
         <el-table-column label="是否有票">
@@ -106,12 +106,29 @@
           <el-input v-model.number="form.childTicket"></el-input>
         </el-form-item>
 
-        <el-form-item label="开门时间" prop="openingTime" :label-width="rules.width">
-          <el-input v-model.number="form.openingTime"></el-input>
+        <el-form-item label="开门时间" :label-width="rules.width" prop="openingTime">
+          <el-time-select
+            v-model="form.openingTime"
+            :picker-options="{
+              start: '00:00',
+              step: '00:30',
+              end: '24:00'
+            }"
+            placeholder="选择营业时间">
+          </el-time-select>
         </el-form-item>
 
-        <el-form-item label="关门时间" prop="closingTime" :label-width="rules.width">
-          <el-input v-model.number="form.closingTime"></el-input>
+        <el-form-item label="关门时间" :label-width="rules.width" prop="closingTime">
+          <el-time-select
+            v-model="form.closingTime"
+            :picker-options="{
+              start: '00:00',
+              step: '00:30',
+              end: '24:00',
+              minTime: form.openingTime
+            }"
+            placeholder="选择关门时间">
+          </el-time-select>
         </el-form-item>
 
       </el-form>
@@ -151,8 +168,8 @@ export default {
         name: [{ required: true, message: '请输入景点名称', trigger: 'blur', type: 'string' },],
         adultTicket: [{ required: true, message: '请输入成人票价格', trigger: 'blur' }, { type: 'number', message: '必须为数字值'}],
         childTicket: [{ required: true, message: '请输入儿童票价格', trigger: 'blur' }, { type: 'number', message: '必须为数字值'}],
-        openingTime: [{ required: true, message: '请输入开始时间', trigger: 'blur' }, { type: 'number', message: '必须为数字值'}],
-        closingTime: [{ required: true, message: '请输入结束时间', trigger: 'blur' }, { type: 'number', message: '必须为数字值'}],
+        openingTime: [{ required: true, message: '请选择时间', trigger: 'change' }],
+        closingTime: [{ required: true, message: '请选择时间', trigger: 'change' }],
       },
       para: { //  查询条件
         pageIndex: 1,
@@ -226,7 +243,7 @@ export default {
           break
       }
     },
-    handleSuccess () {
+    handleSuccess () { //  点击完成处理不同状态
       switch (this.currentSetSts) {
         case 'add': //  添加
           this.$refs.form.validate((valid) => {
