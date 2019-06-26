@@ -1,7 +1,7 @@
 import axios from 'axios'
 // axios.defaults.withCredentials = true
 
-let base = 'http://127.0.0.1:3000' //  local Address
+let base = 'http://192.168.1.103:3000' //  local Address
 
 let config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
 //  用户登录

@@ -1,6 +1,5 @@
-
 <template>
-  <div>hello</div>
+  <div>location</div>
 </template>
 
 <script>
@@ -12,4 +11,3 @@ export default {
 <style>
 
 </style>
-
