@@ -26,7 +26,7 @@ router.get('/', async (ctx, next) => { //  查询用户列表
 router.post('/login', async (ctx, next) =>{ //  登录
   console.log(ctx.request.body)
   let para = {
-    'name': ctx.request.body.name,
+    'phone': ctx.request.body.phone,
     'pwd': ctx.request.body.pwd
   }
   let res = await users.find(para)
@@ -41,6 +41,28 @@ router.post('/login', async (ctx, next) =>{ //  登录
       code: 1001,
       msg: '账号密码错误',
       data: res
+    }
+  }
+})
+
+router.post('/add', async (ctx, next) =>{ //  注册
+  console.log(ctx.request.body)
+  let para = {
+    'phone': ctx.request.body.phone,
+    'pwd': ctx.request.body.pwd,
+    'role': ctx.request.body.role,
+    'roleLv': ctx.request.body.role === 'ordinary'? 1: 2,
+  }
+  let res = await users.create(para)
+  if (res) {
+    ctx.response.body = {
+      code: 200,
+      msg: '操作成功',
+    }
+  } else {
+    ctx.response.body = {
+      code: 1001,
+      msg: '注册失败',
     }
   }
 })

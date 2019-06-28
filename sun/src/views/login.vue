@@ -4,7 +4,7 @@
     <div class="box">
       <van-cell-group>
         <van-field
-          v-model="form.name"
+          v-model="form.phone"
           label="用户名"
           placeholder="请输入用户名"
         />
@@ -18,21 +18,40 @@
         />
       </van-cell-group>
       <div class="btns">
-        <van-button square type="info">注册</van-button>
-        <van-button square type="primary">登录</van-button>
+        <van-button square type="info" to="/reg">注册</van-button>
+        <van-button square type="primary" @click="dologin">登录</van-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { userslogin } from '../api'
 export default {
   name: 'login',
   data () {
     return {
       form: {}
     }
-  }
+  },
+  created() {
+    
+  },
+  methods: {
+    dologin () {
+      let para = new URLSearchParams(this.form)
+      userslogin(para).then(res => {
+        console.log(res)
+        let { code, msg, data } = res
+        if (code === 200) {
+          localStorage.setItem('user', data[0]._id)
+          this.$router.push( {path: '/setting'} )
+        } else {
+          this.$toast.fail(msg)
+        }
+      })
+    }
+  },
 }
 </script>
 

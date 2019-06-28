@@ -10,7 +10,7 @@
       text-color="#fff"
       :unique-opened="uniqueOpened"
       active-text-color="#ffd04b">
-      <div class="txtright menuicon"><i :class="menuicon" @click="handleChangeStatus"></i></div>
+      <!-- <div class="txtright menuicon"><i :class="menuicon" @click="handleChangeStatus"></i></div> -->
       
       <div v-for='item in getmenuList' :key="item.key" >
          <el-menu-item  :index='item.id' v-if="!item.hasChild" @click="rv(item.path)">
@@ -76,7 +76,7 @@ export default {
 
 
   .el-menu-vertical-demo:not(.el-menu--collapse) {
-    min-height 600px
+    min-height 100vh
   }
   .menuicon {
     padding 0 10px

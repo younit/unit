@@ -60,22 +60,12 @@ export default {
     }
   },
   methods: {
-    rw () { //  路由跳转
-
-    }
   },
 }
 </script>
 
 <style lang="stylus">
 #navItem {
-  // position absolute
-  // bottom 0
-  // min-height 10vh
-  // width 100%
-  // background-color #ccc
-  // display flex
-  // justify-content space-between
   .van-tabbar {
     min-height 8vh
     .van-tabbar-item {

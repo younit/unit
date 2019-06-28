@@ -7,8 +7,8 @@ module.exports = {
   configureWebpack: () => {},
   devServer: {
     proxy: {
-      '/goods': {
-        target: 'http://127.0.0.1:3000',
+      '*': {
+        target: 'http://58.37.57.242:3000',
         changeOrigin: true
       }
     }

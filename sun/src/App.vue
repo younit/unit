@@ -9,7 +9,7 @@ import navItem from './components/navItem'
 export default {
   components: {
     navItem
-  }
+  },
 }
 </script>
 

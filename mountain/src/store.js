@@ -27,8 +27,25 @@ export default new Vuex.Store({
           },
         ]
       },
+      {
+        id: 'module',
+        name: '模块管理',
+        path: 'module',
+        hasChild: true,
+        icon: 'el-icon-s-operation',
+        childrenList: [
+          {
+            id: 'module',
+            name: '模块列表',
+            path: 'module',
+          },
+        ]
+      },
     ],
-    citys: [
+    citys: [ //  所有城市数据
+      {
+        name: '北京'
+      },
       {
         name: '上海'
       }

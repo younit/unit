@@ -3,8 +3,8 @@
     <div class="login__bg"><img src="https://index.cuican520.com/xm-bg.png" alt=""></div>
     <el-form :model="form" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
       <!-- <h3 class="title"><i class="cuicanLogo"></i><span>琅粤后台管理</span></h3> -->
-      <el-form-item prop="name">
-        <el-input type="text" v-model="form.name" auto-complete="off" placeholder="账号" class="inputstyls">
+      <el-form-item prop="phone">
+        <el-input type="text" v-model="form.phone" auto-complete="off" placeholder="账号" class="inputstyls">
           <template slot="prepend">
             <img src="../../public/user.png" alt="">
           </template>
@@ -33,11 +33,11 @@ export default {
     return {
       logining: false,
       form: {
-        name: '',
-        pwd: ''
+        phone: '',
+        pwd: '',
       },
       rules2: {
-        name: [
+        phone: [
           {
             required: true,
             message: '请输入账号',
