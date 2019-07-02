@@ -85,7 +85,7 @@ router.post('/edit', async (ctx, next) => { //  修改景点
   }
 })
 
-router.post('/delete', async (ctx, next) => { //  修改景点
+router.post('/delete', async (ctx, next) => { //  删除景点
   let where = {'_id': ctx.request.body.id}
   
   let res  = await citys.remove(where)

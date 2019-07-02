@@ -41,6 +41,20 @@ export default new Vuex.Store({
           },
         ]
       },
+      {
+        id: 'article',
+        name: '文章管理',
+        path: 'article',
+        hasChild: true,
+        icon: 'el-icon-document',
+        childrenList: [
+          {
+            id: 'article',
+            name: '文章列表',
+            path: 'article',
+          },
+        ]
+      },
     ],
     citys: [ //  所有城市数据
       {

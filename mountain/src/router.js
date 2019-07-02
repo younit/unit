@@ -51,5 +51,17 @@ export default new Router({
         }
       ]
     },
+    {
+      path: '/article',
+      name: 'articles',
+      component: () => import('./views/Home.vue'),
+      children: [
+        {
+          path: '/article',
+          name: 'article',
+          component: () => import('./views/article.vue')
+        }
+      ]
+    },
   ]
 })

@@ -67,6 +67,7 @@ export default {
           })
         } else {
           sessionStorage.setItem('user', data.data[0].name)
+          sessionStorage.setItem('uid', data.data[0]._id)
           this.$router.push({ path: '/home' })
         }
       })

@@ -6,12 +6,15 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
+
+
 const index = require('./routes/index')
 const users = require('./routes/users')
 const goods = require('./routes/goods')
 const citys = require('./routes/citys')
-const cors = require('koa2-cors')
+const articles = require('./routes/articles')
 
+const cors = require('koa2-cors')
 // error handler
 onerror(app)
 
@@ -63,6 +66,7 @@ app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(goods.routes(), goods.allowedMethods())
 app.use(citys.routes(), citys.allowedMethods())
+app.use(articles.routes(), articles.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

@@ -17,3 +17,12 @@ export const citysadd = params => { return axios.post(`${ base }/citys/add`, par
 export const citysedit = params => { return axios.post(`${ base }/citys/edit`, params, config).then(res => res.data) }
 //  删除景点
 export const citysdelete = params => { return axios.post(`${ base }/citys/delete`, params, config).then(res => res.data) }
+//  列表
+export const articleslist = params => { return axios.get(`${base}/articles`, { params: params }) }
+//  添加文章
+export const articlesadd = params => { return axios.post(`${ base }/articles/add`, params, config).then(res => res.data) }
+//  编辑
+export const articlesedit = params => { return axios.post(`${ base }/articles/edit`, params, config).then(res => res.data) }
+//  删除
+export const articlesdelete = params => { return axios.post(`${ base }/articles/delete`, params, config).then(res => res.data) }
+
