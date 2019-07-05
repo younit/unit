@@ -8,11 +8,22 @@ const logger = require('koa-logger')
 
 
 
-const index = require('./routes/index')
-const users = require('./routes/users')
-const goods = require('./routes/goods')
-const citys = require('./routes/citys')
-const articles = require('./routes/articles')
+// const index = require('./routes/index')
+// const users = require('./routes/users')
+// const goods = require('./routes/goods')
+// const citys = require('./routes/citys')
+// const articles = require('./routes/articles')
+// const qiniu = require('./routes/qiniu')
+
+let rlist = [index, users, goods, citys, articles, qiniu] = [
+  require('./routes/index'),
+  require('./routes/users'),
+  require('./routes/goods'),
+  require('./routes/citys'),
+  require('./routes/articles'),
+  require('./routes/qiniu')
+]
+
 
 const cors = require('koa2-cors')
 // error handler
@@ -62,11 +73,15 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
-app.use(goods.routes(), goods.allowedMethods())
-app.use(citys.routes(), citys.allowedMethods())
-app.use(articles.routes(), articles.allowedMethods())
+for (let i = 0; i < rlist.length; i++) {
+  app.use(rlist[i].routes(), rlist[i].allowedMethods())
+}
+// app.use(index.routes(), index.allowedMethods())
+// app.use(users.routes(), users.allowedMethods())
+// app.use(goods.routes(), goods.allowedMethods())
+// app.use(citys.routes(), citys.allowedMethods())
+// app.use(articles.routes(), articles.allowedMethods())
+// app.use(qiniu.routes(), qiniu.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

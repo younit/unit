@@ -10,6 +10,7 @@ set.connectDB(mongoose)
 function articlesmodel (ctx) {
   let para = {
     "title" : ctx.request.body.title, //  "标题", 
+    "cover": ctx.request.body.cover,
     "author" : ctx.request.body.author, //  "作者", 
     "uid" : ctx.request.body.uid, //  "作者id", 
     "date" : ctx.request.body.date, //  "日期", 
@@ -21,12 +22,11 @@ function articlesmodel (ctx) {
 }
 
 router.get('/', async (ctx, next) => { //  列表
-  let para = {}
-  console.log(ctx.query)
+  // let para = ctx.query
   let pageIndex = parseInt(ctx.query.pageIndex)
   let pageSize = parseInt(ctx.query.pageSize)
-  let total = await articles.find(para).count()
-  let res = await articles.find(para).skip(pageSize * (pageIndex - 1)).limit(pageSize)
+  let total = await articles.find().count()
+  let res = await articles.find().skip(pageSize * (pageIndex - 1)).limit(pageSize).sort({'date': -1})
   set.find(ctx, res, total)
 })
 

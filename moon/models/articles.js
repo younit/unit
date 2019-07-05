@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const articlesSchema = new Schema({
   "title" : String, //  "标题", 
+  "cover" : String, //  "封面"
   "author" : String, //  "作者", 
   "uid" : String, //  "作者id", 
   "date" : String, //  "日期", 

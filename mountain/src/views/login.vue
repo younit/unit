@@ -62,7 +62,7 @@ export default {
         let { msg, code, user } = data
         if (code !== 200) {
           this.$message({
-            message: '用户名或者密码错误',
+            message: msg,
             type: 'error'
           })
         } else {

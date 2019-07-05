@@ -30,11 +30,20 @@ router.post('/login', async (ctx, next) =>{ //  登录
     'pwd': ctx.request.body.pwd
   }
   let res = await users.find(para)
+  console.log(res)
   if (res.length) {
-    ctx.response.body = {
-      code: 200,
-      msg: '操作成功',
-      data: res
+    if (res[0].roleLv !== 0) {
+      ctx.response.body = {
+        code: 1002,
+        msg: '无权限登录',
+        // data: res
+      }
+    } else {
+      ctx.response.body = {
+        code: 200,
+        msg: '操作成功',
+        data: res
+      }
     }
   } else {
     ctx.response.body = {
@@ -50,6 +59,7 @@ router.post('/add', async (ctx, next) =>{ //  注册
   let para = {
     'phone': ctx.request.body.phone,
     'pwd': ctx.request.body.pwd,
+    'name': ctx.request.body.name,
     'role': ctx.request.body.role,
     'roleLv': ctx.request.body.role === 'ordinary'? 1: 2,
   }

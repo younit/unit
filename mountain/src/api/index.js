@@ -25,4 +25,6 @@ export const articlesadd = params => { return axios.post(`${ base }/articles/add
 export const articlesedit = params => { return axios.post(`${ base }/articles/edit`, params, config).then(res => res.data) }
 //  删除
 export const articlesdelete = params => { return axios.post(`${ base }/articles/delete`, params, config).then(res => res.data) }
+//  获取七牛token
+export const qiniutoken = params => { return axios.get(`${base}/qiniu/token`, { params: params }) }
 

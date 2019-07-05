@@ -23,6 +23,7 @@ module.exports = {
      return ctx.response.body = {
         code: 200,
         msg: '操作成功',
+        data: res
       }
     } else {
       return  ctx.response.body = {

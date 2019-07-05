@@ -10,3 +10,5 @@ export const userslogin = params => { return axios.post(`${ base }/users/login`,
 export const users = params => { return axios.get(`${base}/users`, { params: params }) }
 //  注册用户
 export const usersadd = params => { return axios.post(`${ base }/users/add`, params, config).then(res => res.data) }
+//  文章列表
+export const articles = params => { return axios.get(`${base}/articles`, { params: params }) }

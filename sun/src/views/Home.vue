@@ -27,23 +27,22 @@
       @load="onLoad"
     >
       <van-cell
-        v-for="item in list"
-        :key="item"
+        v-for="item in list.data"
+        :key="item.key"
       >
       <div class="list_img">
-        {{item}}
+        <img :src="item.cover" alt="">
       </div>
-      <div class="list_desc">
-        遇见一场旅行,遇见一场旅行,遇见一场旅行,遇见一场旅行,
+      <div class="article">
+        <div class="article__title">{{ item.title }}</div>
+        <div class="article__author"><van-icon name="manager"/>{{ item.author }}</div>
       </div>
       </van-cell>
     </van-list>
-
-
   </div>
 </template>
-
 <script>
+import { articles } from '../api'
 export default {
   name: 'home',
   data () {
@@ -53,30 +52,49 @@ export default {
         height: 220,
         autoplay: 2000, //  自动轮播间隔 2s
       },
-      list: [],
+      list: {
+        data: [],
+        total: 0,
+      },
       loading: false,
       finished: false,
+      para: {
+        pageIndex: 1,
+        pageSize: 0,
+      },
     }
+  },
+  mounted() {
   },
   methods: {
     onChange (index) {
       this.current = index
     },
-    onLoad () {
-      for (let i = 0; i < 10; i++) {
-        this.list.push(this.list.length + 1)
-      }
-      // 加载状态结束
-      this.loading = false
-      if (this.list.length >= 40) {
-        this.finished = true
-      }
+    onLoad () { //  获取文章列表
+      this.para.pageSize = this.para.pageSize + 10
+      articles(this.para).then(res => {
+        console.log(res.data)
+        let { code, msg, data, total } = res.data
+        if (code !== 200) {
+          this.$message.error(msg)
+        } else {
+          this.list.data = data
+          this.list.total = total
+          this.loading = false
+          if (this.para.pageSize >= this.list.total) {
+            this.finished = true
+          }
+        }
+      })
     }
   },
 }
 </script>
 <style lang="stylus">
   #home {
+    .van-cell:not(:last-child)::after {
+      border 0 !important
+    }
     .van-swipe {
       position relative
       background-color pink
@@ -97,20 +115,44 @@ export default {
     }
     .van-list {
       padding 8px 0
+      margin 0 0 50px 0
       .van-cell {
         display inline-block
         width 50%
         height 24vh
+        margin-top 8px
         .van-cell__value {
           height 100%
-          background-color pink
           .list_img {
             height 70%
             background-color #fff
+            border 1px solid #ccc
+            img {
+              width 100%
+              height 100%
+            }
           }
-          .list_desc {
+          .article {
             height 30%
-            background-color rgba(0, 0, 0, 0.2)
+            &__title {
+              width 100%
+              overflow hidden
+              white-space nowrap
+              text-overflow ellipsis
+              text-indent 1em
+              line-height 2em
+              font-size 14px
+              color #000
+              margin-top: 4px
+            }
+            &__author {
+              text-align right
+              margin-right 8px
+              .van-icon {
+                vertical-align -1px
+                margin-right 8px
+              }
+            }
           }
         }
       }

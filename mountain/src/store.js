@@ -63,7 +63,7 @@ export default new Vuex.Store({
       {
         name: '上海'
       }
-    ]
+    ],
   },
   getters: {
     getmenuList: (state) => {
@@ -71,7 +71,7 @@ export default new Vuex.Store({
     },
     getcitys: (state) => {
       return state.citys
-    },
+    }
   },
   mutations: {
 

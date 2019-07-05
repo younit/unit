@@ -87,7 +87,7 @@ export default {
   .setting_head {
     background-image url('http://mziu.club/setting_head.jpeg')
     background-size 100% 100%
-    height (812/250*10)vh
+    height 220px
   }
   .van-tabbar {
     margin 50px 0
