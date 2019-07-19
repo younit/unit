@@ -18,6 +18,11 @@ module.exports = {
       }
     }
   },
+  /**
+   * 
+   * @param { String } ctx 
+   * @param { String } res 
+   */
   tips (ctx, res) {
     if (res) {
      return ctx.response.body = {
@@ -29,6 +34,7 @@ module.exports = {
       return  ctx.response.body = {
         code: 1001,
         msg: '操作失败',
+        data: res
       }
     }
   }

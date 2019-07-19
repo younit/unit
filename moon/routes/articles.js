@@ -26,8 +26,16 @@ router.get('/', async (ctx, next) => { //  列表
   let pageIndex = parseInt(ctx.query.pageIndex)
   let pageSize = parseInt(ctx.query.pageSize)
   let total = await articles.find().count()
-  let res = await articles.find().skip(pageSize * (pageIndex - 1)).limit(pageSize).sort({'date': -1})
+  let res = await articles.find().skip(pageSize * (pageIndex - 1)).limit(pageSize).sort({'date': 1})
   set.find(ctx, res, total)
+})
+
+router.get('/detail', async (ctx, next) => { //  详情
+  let para = {
+    _id: ctx.query._id
+  }
+  let res = await articles.find(para)
+  set.tips(ctx, res)
 })
 
 router.post('/add', async (ctx, next) => { //  添加

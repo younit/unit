@@ -6,7 +6,7 @@ const articlesSchema = new Schema({
   "cover" : String, //  "封面"
   "author" : String, //  "作者", 
   "uid" : String, //  "作者id", 
-  "date" : String, //  "日期", 
+  "date" : Number, //  "日期", 
   "content" : String, //  "内容", 
   "likes" : String, //  "喜欢", 
   "score" : String, //  "评分"

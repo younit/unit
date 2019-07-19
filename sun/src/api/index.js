@@ -12,3 +12,5 @@ export const users = params => { return axios.get(`${base}/users`, { params: par
 export const usersadd = params => { return axios.post(`${ base }/users/add`, params, config).then(res => res.data) }
 //  文章列表
 export const articles = params => { return axios.get(`${base}/articles`, { params: params }) }
+//  文章详情
+export const articlesdetail = params => { return axios.get(`${base}/articles/detail`, { params: params }) }

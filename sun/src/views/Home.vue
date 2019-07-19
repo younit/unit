@@ -29,6 +29,7 @@
       <van-cell
         v-for="item in list.data"
         :key="item.key"
+        @click="handleArticleDetail(item)"
       >
       <div class="list_img">
         <img :src="item.cover" alt="">
@@ -64,9 +65,13 @@ export default {
       },
     }
   },
-  mounted() {
+  mounted () {
   },
   methods: {
+    handleArticleDetail (val) {
+      this.$router.push({ path: '/article', query: { _id: val._id } })
+      console.log(val)
+    },
     onChange (index) {
       this.current = index
     },

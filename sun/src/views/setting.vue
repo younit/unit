@@ -28,8 +28,8 @@
 
     <van-cell title="任务中心" is-link/>
     <van-cell title="我的收藏" is-link/>
-    <van-cell title="我的文章" is-link/>
-    <van-cell title="设置" is-link/>
+     
+    <van-cell title="设置" is-link to="setup"/>
     
   </div>
 </template>

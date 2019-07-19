@@ -325,8 +325,14 @@ export default {
       } else {
         this.form.author = sessionStorage.getItem('user')
         this.form.uid = sessionStorage.getItem('uid')
-        this.form.date = utils.formatterTime(new Date())
-        this.form.cover = this.form.content.match(/(http[^">]*)/g)[0]
+        // this.form.date = utils.formatterTime(new Date())
+        this.form.date = new Date().getTime()
+        if (this.form.content.match(/(http[^">]*)/g)) {
+          this.form.cover = this.form.content.match(/(http[^">]*)/g)[0] //  全文查找第一张图片
+        } else {
+          this.$message.error('请上传至少一张图片')
+          return false
+        }
         let para = new URLSearchParams(this.form)
         let a
         if (this.currentSetStatus === 'add') {

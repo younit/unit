@@ -43,5 +43,15 @@ export default new Router({
       name: 'reg',
       component: () => import('./views/reg.vue')
     },
+    {
+      path: '/article',
+      name: 'article',
+      component: () => import('./views/article.vue')
+    },
+    {
+      path: '/setup',
+      name: 'setup',
+      component: () => import('./views/setup.vue')
+    },
   ]
 })

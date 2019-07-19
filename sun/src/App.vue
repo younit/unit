@@ -33,6 +33,9 @@ export default {
 .txtcolor {
   color #66d8da
 }
+.txtcenter {
+  text-align center
+}
 .bgcolor {
   background-color #66d8da
 }
