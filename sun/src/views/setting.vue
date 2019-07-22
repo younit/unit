@@ -1,12 +1,14 @@
 <template>
   <div id="setting">
     <div class="setting_head">
-      <div v-if="islogin">
-          hello, {{ uid }}
+      <div class="setting_headImg">
+        <img :src="form.headImg"  class="setting_Img">
+        <div v-if="!islogin">
+          <van-button square type="default" to="/login">登录/注册</van-button>
+        </div>
       </div>
-
-      <div v-if="!islogin">
-       <van-button square type="default" to="/login">登录/注册</van-button>
+      <div v-if="islogin" class="setting_name">
+          {{ form.name }}
       </div>
     </div>
 
@@ -15,13 +17,13 @@
     :fixed="false"
     inactive-color="pink">
       <van-tabbar-item 
-      v-for="item in list" 
-      :key="item.key" 
-      :icon="item.active_icon" 
-      :name="item.path" 
-      :info="item.info" 
-      :dot="item.dot" 
-      :to="'/'+item.path">
+        v-for="item in list" 
+        :key="item.key" 
+        :icon="item.active_icon" 
+        :name="item.path" 
+        :info="item.info" 
+        :dot="item.dot" 
+        :to="'/'+item.path">
         <span class="part">{{ item.part }}</span>
       </van-tabbar-item>
     </van-tabbar>
@@ -35,12 +37,14 @@
 </template>
 
 <script>
+import { users } from '../api'
 export default {
   name: 'setting',
   data () {
     return {
       islogin: false,
-      uid: '',
+      user: '',
+      form: {},
       list: [
         {
           part: '打卡',
@@ -68,14 +72,29 @@ export default {
       ],
     }
   },
-  created (){
-    let user = localStorage.getItem('user')
-    console.log(user)
-    if (user) {
-      this.islogin = true
-      this.uid = user
+  created() {
+    let id = localStorage.getItem('user')
+    if (id) {
+      this.getInfo()
     } else {
-      this.islogin = false
+      this.islogin = false //  去登录
+    }
+  },
+  mounted () {
+  },
+  methods: {
+    getInfo () {
+      let para = {
+        '_id': localStorage.getItem('user')
+      }
+      users(para).then(res => {
+        console.log(res)
+        let { code, msg, data } = res.data
+        if (code === 200) {
+          this.islogin = true
+          this.form = data[0]
+        }
+      })
     }
   },
 }
@@ -88,6 +107,25 @@ export default {
     background-image url('http://mziu.club/setting_head.jpeg')
     background-size 100% 100%
     height 220px
+    text-align center
+  }
+  .setting_headImg {
+    width 100px
+    height 100px
+    background-color #fff
+    border-radius 50px
+    margin 0 auto
+    display inline-block
+    margin-top 60px
+    border 1px solid #ffc
+    .setting_Img {
+      max-width none
+      height 100%
+      border-radius 50px
+    }
+  }
+  .setting_name {
+    color #ffc
   }
   .van-tabbar {
     margin 50px 0

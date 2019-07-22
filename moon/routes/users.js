@@ -7,8 +7,12 @@ router.prefix('/users')
 mongoose.connect('mongodb://sea:sea@47.103.147.50:27017/sea', { useNewUrlParser:true })
 
 router.get('/', async (ctx, next) => { //  查询用户列表
-  let res = await users.find()
-  set.find(ctx, res, total)
+  let para = {}
+  if (ctx.query._id) {
+    para._id =  mongoose.Types.ObjectId(ctx.query._id)
+  }
+  let res = await users.find(para)
+  set.tips(ctx, res)
 })
 
 router.post('/login', async (ctx, next) =>{ //  登录
@@ -56,7 +60,9 @@ router.post('/add', async (ctx, next) =>{ //  注册
 })
 
 router.post('/update', async (ctx, next) =>{ //  修改资料
-  let res = await users.save(ctx.request.body)
+  console.log(ctx.request.body)
+  let _id =  mongoose.Types.ObjectId(ctx.request.body._id)
+  let res = await users.updateMany({ '_id':  _id}, { $set: ctx.request.body })
   set.tips(ctx, res)
 })
 

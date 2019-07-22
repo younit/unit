@@ -8,6 +8,7 @@ const productSchema = new Schema({
   'status': Number, //  状态
   'role': String, //  角色
   'roleLv': Number, //  角色等级
+  'headImg': String, //  头像
   
 })
 module.exports = mongoose.model('users', productSchema)

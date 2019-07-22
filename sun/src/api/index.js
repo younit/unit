@@ -10,7 +10,11 @@ export const userslogin = params => { return axios.post(`${ base }/users/login`,
 export const users = params => { return axios.get(`${base}/users`, { params: params }) }
 //  注册用户
 export const usersadd = params => { return axios.post(`${ base }/users/add`, params, config).then(res => res.data) }
+//  更新用户信息
+export const usersupdate = params => { return axios.post(`${ base }/users/update`, params, config).then(res => res.data) }
 //  文章列表
 export const articles = params => { return axios.get(`${base}/articles`, { params: params }) }
 //  文章详情
 export const articlesdetail = params => { return axios.get(`${base}/articles/detail`, { params: params }) }
+//  获取七牛token
+export const qiniutoken = params => { return axios.get(`${base}/qiniu/token`, { params: params }) }
