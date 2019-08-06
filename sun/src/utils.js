@@ -18,5 +18,18 @@ var utils = {
     }
     return str
   },
+  getImgToBase64: (file) => {
+    return new Promise( (resolve) => {
+      let files = {}
+      files.imageUrl = URL.createObjectURL(file.raw) // 图片预览
+      let reader = new FileReader() //  生成文件读取
+      reader.readAsDataURL(file.raw) //  转化文件数据流链接
+      reader.onload =  function () {
+        files.img = reader.result //  拿到base64结果
+        resolve(files)
+      }
+     
+    })
+  },
 }
 export default utils

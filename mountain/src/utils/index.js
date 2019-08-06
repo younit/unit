@@ -11,6 +11,9 @@ var utils = {
     // const dateTime = year + '-' + month + '-' + day
     return dateTime
   },
+  test: () => {
+    console.log(1)
+  },
   checkLength: (str) => {
     str = str.toString()
     if (str.length < 2) {

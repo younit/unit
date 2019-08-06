@@ -1,110 +1,97 @@
 <template>
   <div>
     <el-upload
-      class="upload-demo"
-      :data="qiniu"
+      class="avatar-uploader"
       ref="upload"
       action="https://upload-z2.qiniup.com"
-      :show-file-list="true"
-      :multiple="false"
-      :file-list="fileList.articles"
+      :show-file-list="false"
       :auto-upload="false"
-      :before-upload="(file) => {return handleBeforeUpload(file, 'articles')}"
-      :on-success="(response, file, fileList) => { return handleOnSuccess(response, file, fileList, 'articles') }"
-      :on-remove="(file, fileList) => { return handleOnRemove(file, fileList, 'articles') }"
+      :on-change="handleChange"
     >
-    <el-button size="small" type="primary">点击上传</el-button>
+      <img v-if="imageUrl" :src="imageUrl" class="avatar">
+      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
-    <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-
-
-    <div>
-
-      <input type="file" @change="getFile" ref="file" id="file">
-
-    </div>
+    <el-button  @click="submitUpload">上传到服务器</el-button>
   </div>
 </template>
 
 <script>
-import { qiniutoken } from '../api'
-import moment from 'moment'
+import { qiniuupload } from '../api'
 export default {
   data () {
     return {
-      fileList: {
-        articles: []
-      },
-      qiniu: { //  七牛上传
-        token: '',
-        key: '',
-        uploadUrl: '', //  上传地址前缀
-      },
+      imageUrl: '',
       form: {
-        imglist: []
+        img: ''
       }
     }
   },
-  mounted() {
-    this.getqiniutoken()
-  },
   methods: {
-
-    getFile (e) {
-      console.log(e)
-        let _this = this
-        var files = e.target.files[0]
-        console.log(files)
-        if (!e || !window.FileReader) return  // 看支持不支持FileReader
-        let reader = new FileReader()
-        reader.readAsDataURL(files) // 这里是最关键的一步，转换就在这里
-        reader.onloadend = function () {
-          console.log(this.result)
-          _this.src = this.result
-        }
-      }
-
-    ,  
-    getqiniutoken () {
-      let para = {
-        bucket: 'huaxiaohong'
-      }
-      qiniutoken(para).then(res => {
+    submitUpload () {
+      let para = new URLSearchParams((this.form))
+      qiniuupload(para).then(res => {
         console.log(res)
-        let { code, data, msg } = res.data
-        if (code === 200) {
-          this.qiniu.token = data.token
-          this.qiniu.uploadUrl = data.url
-          console.log(this.qiniu)
-        } else {
-          this.$message(msg)
+      })
+    },
+    handleChange (file, fileList) {
+      const _this = this
+      console.log(file)
+      this.imageUrl = URL.createObjectURL(file.raw) // 图片预览
+      let reader = new FileReader() //  生成文件读取
+      reader.readAsDataURL(file.raw) //  转化文件数据流链接
+      reader.onload = function () {
+        _this.form.img = reader.result //  拿到base64结果
+        console.log(_this.form.img)
+      }
+      // this.getImgToBase64(file.raw).then(res => {
+      //   console.log(res)
+      // })
+    },
+    getImgToBase64 (file) {
+      return new Promise(function (resolve, reject)  {
+        let reader = new FileReader()
+        let imgs = ''
+        reader.readAsDataURL(file)
+        reader.onload = function () {
+          imgs = reader.result
+        }
+        reader.onerror = error => {
+          reject(error)
+        }
+        reader.onloadend = () => {
+          resolve(imgs)
         }
       })
     },
-    submitUpload() {
-      this.$refs.upload.submit();
-    },
-    handleBeforeUpload (file, type) { //  上传之前
-      this.qiniu.key = ``+ type +`${moment().format('YYYYMMDDHHmmSSS')}${Number.parseInt(Math.random() * 1000, 10)}.${file.type.split('/')[1]}`
-    },
-    handleOnSuccess (response, file, fileList, type) { //  上传成功之后
-      let url = this.qiniu.uploadUrl + '/' + response.key
-      this.form[type] =  url
+  },
+  mounted() {
     
-      // this.fileList[type].push({ //  显示文件
-      //   name: response.key,
-      //   url: url
-      // })
-      console.log(this.form)
-    },
-    handleOnRemove (file, fileList, type) { //  删除
-      // this.fileList[type] = []
-      console.log(file, fileList)
-    },
   },
 }
 </script>
-
 <style>
-
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
 </style>
+

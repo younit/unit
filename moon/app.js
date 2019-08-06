@@ -7,21 +7,14 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
 
-
-// const index = require('./routes/index')
-// const users = require('./routes/users')
-// const goods = require('./routes/goods')
-// const citys = require('./routes/citys')
-// const articles = require('./routes/articles')
-// const qiniu = require('./routes/qiniu')
-
-let rlist = [index, users, goods, citys, articles, qiniu] = [
+let rlist = [index, users, goods, citys, articles, qiniu, product] = [
   require('./routes/index'),
   require('./routes/users'),
   require('./routes/goods'),
   require('./routes/citys'),
   require('./routes/articles'),
-  require('./routes/qiniu')
+  require('./routes/qiniu'),
+  require('./routes/product'),
 ]
 
 
@@ -31,24 +24,11 @@ onerror(app)
 
 // middlewares
 app.use(cors())
-// app.use(cors({
-//   origin: function (ctx) {
-//     console.log(ctx)
-// 		if (ctx.url === '/goods') {
-// 			return "*"; // 允许来自所有域名请求
-// 		}
-// 		return 'http://localhost:8080';
-// 	},
-// 	methods:['GET','POST'],
-// 	allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
-// }))
-/**
-*    另一种写法
-*    var cors = require('koa2-cors');
-*    app.use(cors())
-*/
 app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
+  enableTypes:['json', 'form', 'text'],
+  formLimit: '50mb', //  默认56kb
+  jsonLimit: '50mb', //  默认1mb
+  textLimit: '50mb', //  默认1mb
 }))
 app.use(json())
 app.use(logger())
@@ -61,9 +41,6 @@ app.use(views(__dirname + '/views', {
 // logger
 app.use(async (ctx, next) => {
   ctx.set("Access-Control-Allow-Origin", "*")
-  // ctx.set("Access-Control-Allow-Origin", "http://localhost:8080")
-  // ctx.set("Access-Control-Allow-Headers", "X-Requested-With")
-  // ctx.set("Access-Control-Allow-Credentials", "true")
   ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
   ctx.set("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS")
   const start = new Date()
@@ -76,13 +53,6 @@ app.use(async (ctx, next) => {
 for (let i = 0; i < rlist.length; i++) {
   app.use(rlist[i].routes(), rlist[i].allowedMethods())
 }
-// app.use(index.routes(), index.allowedMethods())
-// app.use(users.routes(), users.allowedMethods())
-// app.use(goods.routes(), goods.allowedMethods())
-// app.use(citys.routes(), citys.allowedMethods())
-// app.use(articles.routes(), articles.allowedMethods())
-// app.use(qiniu.routes(), qiniu.allowedMethods())
-
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)

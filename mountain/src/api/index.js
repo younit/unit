@@ -27,4 +27,11 @@ export const articlesedit = params => { return axios.post(`${ base }/articles/ed
 export const articlesdelete = params => { return axios.post(`${ base }/articles/delete`, params, config).then(res => res.data) }
 //  获取七牛token
 export const qiniutoken = params => { return axios.get(`${base}/qiniu/token`, { params: params }) }
-
+//  服务端上传
+export const qiniuupload = params => { return axios.post(`${ base }/qiniu/upload`, params, config).then(res => res.data) }
+//  产品列表
+export const product = params => { return axios.get(`${base}/product`, { params: params }) }
+//  添加产品
+export const productadd = params => { return axios.post(`${ base }/product/add`, params, config).then(res => res.data) }
+//  删除产品
+export const productdelete = params => { return axios.post(`${ base }/product/delete`, params, config).then(res => res.data) }

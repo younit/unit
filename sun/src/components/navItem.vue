@@ -8,8 +8,8 @@
       v-for="item in list" 
       :key="item.key" 
       :icon="active === item.path ? item.active_icon : item.icon" 
-      :name="item.path" 
-      :info="item.info" 
+      :name="item.path"
+      :info="item.info"
       :dot="item.dot" 
       :to="'/'+item.path">
         <span>{{ item.part }}</span>

@@ -1,5 +1,5 @@
 <template>
-  <div id="article">
+  <div id="articles">
     <!-- 文章详情页 -->
     <van-loading size="24px" vertical v-if="loading">加载中...</van-loading>
     <div class="txtcenter">{{ article.title }}</div>
@@ -15,7 +15,7 @@
 import { articlesdetail } from '../api'
 import utils from '../utils'
 export default {
-  name: 'article',
+  name: 'articles',
   data () {
     return {
       loading: true,
@@ -53,7 +53,7 @@ export default {
 }
 </script>
 <style lang="stylus">
-#article 
+#articles
   .info
     font-size 12px
     text-align right 

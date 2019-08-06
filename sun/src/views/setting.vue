@@ -75,6 +75,7 @@ export default {
   created() {
     let id = localStorage.getItem('user')
     if (id) {
+      this.islogin = true
       this.getInfo()
     } else {
       this.islogin = false //  去登录
@@ -91,7 +92,6 @@ export default {
         console.log(res)
         let { code, msg, data } = res.data
         if (code === 200) {
-          this.islogin = true
           this.form = data[0]
         }
       })
@@ -122,6 +122,7 @@ export default {
       max-width none
       height 100%
       border-radius 50px
+      width: 100px;
     }
   }
   .setting_name {

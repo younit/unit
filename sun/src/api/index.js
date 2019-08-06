@@ -18,3 +18,7 @@ export const articles = params => { return axios.get(`${base}/articles`, { param
 export const articlesdetail = params => { return axios.get(`${base}/articles/detail`, { params: params }) }
 //  获取七牛token
 export const qiniutoken = params => { return axios.get(`${base}/qiniu/token`, { params: params }) }
+//  服务端上传
+export const qiniuupload = params => { return axios.post(`${ base }/qiniu/upload`, params, config).then(res => res.data) }
+//  产品列表
+export const product = params => { return axios.get(`${base}/product`, { params: params }) }

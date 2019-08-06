@@ -55,6 +55,20 @@ export default new Vuex.Store({
           },
         ]
       },
+      {
+        id: 'product',
+        name: '产品管理',
+        path: 'product',
+        hasChild: true,
+        icon: 'el-icon-document',
+        childrenList: [
+          {
+            id: 'product',
+            name: '产品列表',
+            path: 'product',
+          },
+        ]
+      },
     ],
     citys: [ //  所有城市数据
       {

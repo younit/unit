@@ -60,7 +60,7 @@ router.post('/add', async (ctx, next) =>{ //  注册
 })
 
 router.post('/update', async (ctx, next) =>{ //  修改资料
-  console.log(ctx.request.body)
+  console.log('info:' + ctx.request.body)
   let _id =  mongoose.Types.ObjectId(ctx.request.body._id)
   let res = await users.updateMany({ '_id':  _id}, { $set: ctx.request.body })
   set.tips(ctx, res)
