@@ -1,29 +1,29 @@
-# sun
+## 更新日志 
 
-## Project setup
-```
-npm install
-```
+### 2019年08月06日16:45:00
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+> 添加`hot`管理页面, 实现以下功能:
+  1.调用`product`接口
+  2.排版`hot`页面样式
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+> 备注
+  实现多元素整齐行排,
+  父元素可以使用`display:flex`结合`flex-wrap`,
+  子元素使用`fkex-grow: 1`并且设置宽度即可。
+  比如一行三元素`width:30%`调整间距。
+  具体代码如下, 详情见`hot`页面搜索`.van-list`
+  ```
+  .van-list
+    padding eight 0
+    margin 0 0 50px 0
+    display flex
+    flex-wrap wrap
+    .list:nth-child(3n+0)
+      margin-right eight
+    .list
+      width 30%
+      flex-grow 1
+      margin-left eight
+      height 28vh
+      position relative
+  ```

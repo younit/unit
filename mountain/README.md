@@ -1,29 +1,12 @@
-# manage-be
+## 更新日志 
 
-## Project setup
-```
-npm install
-```
+### 2019年08月06日16:40:36
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+> 添加`product`管理页面, 实现以下功能:
+  1.对产品的`新增`
+  2.对产品的`编辑`
+  3.对产品的`删除`
+  4.对产品的`查询`
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+> 备注
+  无
