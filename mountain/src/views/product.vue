@@ -145,7 +145,8 @@ export default {
         price: [{ required: true, message: '请输入成人票价格', trigger: 'blur' }, { type: 'number', message: '必须为数字值'}],
         img: [{ required: true, message: '请选择时间', trigger: 'change' }],
       },
-      fullscreenLoading: false
+      fullscreenLoading: false,
+      isuploadImg: false
     }
   },
   mounted() {
@@ -189,6 +190,7 @@ export default {
           this.form = row
           this.form._id = row._id
           this.imageUrl = row.img
+          this.isuploadImg = false
           this.dialogCfg.dialogVisible = true
           break
         case 'preview': //  预览图片
@@ -197,6 +199,7 @@ export default {
             this.previewImg = row
             this.dialogCfg.dialogVisible = true
           }
+          break
         case 'delete':
           this.$confirm('此操作将删除该数据是否继续?', '提示', {
             confirmButtonText: '继续',
@@ -224,26 +227,30 @@ export default {
       }
     },
     handleSuccess () {
+      const _this = this
       console.log(this.currentSetSts)
       switch (this.currentSetSts) {
       case 'add':
       case 'edit': //  添加
-        const _this = this
         this.$refs.form.validate((valid) => {
           if (valid) {
             this.fullscreenLoading = true
-            let para = new URLSearchParams(this.form)
-            qiniuupload(para).then(res => {
-              console.log(res)
-              let { msg, code, data, url } = res
-              if (code === 200) {
-                this.form.img = ''
-                let { key, hash } = data
-                console.log(key)
-                _this.form.img = url + key
-                this.postadd()
-              }
-            })
+            if (this.isuploadImg === false) { //  判断是否重新上传了图片
+              this.postadd()
+            } else {
+              let para = new URLSearchParams(_this.form)
+              qiniuupload(para).then(res => {
+                console.log(res)
+                let { code, data, url } = res
+                if (code === 200) {
+                  this.form.img = ''
+                  let { key, hash } = data
+                  console.log(key, hash)
+                  _this.form.img = url + key
+                  this.postadd()
+                }
+              })
+            }
           } else {
             this.$message.error('请填写完整')
             return false
@@ -255,19 +262,20 @@ export default {
           break
        }
     },
-    handleChange (file, fileList) {
+    handleChange (file) {
       const _this = this
       this.imageUrl = URL.createObjectURL(file.raw) // 图片预览
       let reader = new FileReader() //  生成文件读取
       reader.readAsDataURL(file.raw) //  转化文件数据流链接
       reader.onload = function () {
         _this.form.img = reader.result //  拿到base64结果
+        _this.isuploadImg = true
       }
     },
     postadd () {
       if (this.form._id) { //  编辑
       } else {
-        this.form.createDate = new Date()
+        this.form.createDate = new Date().getTime()
       }
       let para = new URLSearchParams(this.form)
       productadd(para).then(res => {

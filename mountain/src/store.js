@@ -60,12 +60,26 @@ export default new Vuex.Store({
         name: '产品管理',
         path: 'product',
         hasChild: true,
-        icon: 'el-icon-document',
+        icon: 'el-icon-s-shop',
         childrenList: [
           {
             id: 'product',
             name: '产品列表',
             path: 'product',
+          },
+        ]
+      },
+      {
+        id: 'task',
+        name: '任务管理',
+        path: 'task',
+        hasChild: true,
+        icon: 'el-icon-tickets',
+        childrenList: [
+          {
+            id: 'task',
+            name: '任务中心',
+            path: 'task',
           },
         ]
       },

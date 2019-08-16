@@ -35,3 +35,9 @@ export const product = params => { return axios.get(`${base}/product`, { params:
 export const productadd = params => { return axios.post(`${ base }/product/add`, params, config).then(res => res.data) }
 //  删除产品
 export const productdelete = params => { return axios.post(`${ base }/product/delete`, params, config).then(res => res.data) }
+//  产品列表
+export const task = params => { return axios.get(`${base}/task`, { params: params }) }
+//  添加产品
+export const taskadd = params => { return axios.post(`${ base }/task/add`, params, config).then(res => res.data) }
+//  删除产品
+export const taskdelete = params => { return axios.post(`${ base }/task/delete`, params, config).then(res => res.data) }

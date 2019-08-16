@@ -15,6 +15,7 @@ router.get('/token', async (ctx, next) => {
 
 router.post('/upload', async (ctx, next) => {
   let img = ctx.request.body.img
+  // let suffixName = img.match(/[^.]+$/)
   let suffixName = img.match(/[^data:image\/]\w+[^;base]/)
   let base = img.replace(/^data:image\/\w+;base64,/, "")
   let dbuff = new Buffer(base, 'base64')

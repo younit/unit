@@ -7,7 +7,7 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
 
-let rlist = [index, users, goods, citys, articles, qiniu, product] = [
+let rlist = [index, users, goods, citys, articles, qiniu, product, task] = [
   require('./routes/index'),
   require('./routes/users'),
   require('./routes/goods'),
@@ -15,6 +15,7 @@ let rlist = [index, users, goods, citys, articles, qiniu, product] = [
   require('./routes/articles'),
   require('./routes/qiniu'),
   require('./routes/product'),
+  require('./routes/task'),
 ]
 
 

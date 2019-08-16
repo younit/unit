@@ -27,8 +27,10 @@ router.get('/detail', async (ctx, next) => { //  详情
 router.post('/add', async (ctx, next) => { //  添加
   let res
   if (ctx.request.body.createDate) {
-    ctx.request.body.createDate = new Date(ctx.request.body.createDate).getTime()
+    ctx.request.body.createDate = new Date(parseInt(ctx.request.body.createDate)).getTime()
   }
+  ctx.request.body.updateTime = new Date(parseInt(ctx.request.body.updateTime)).getTime()
+
   let para = ctx.request.body
   if (para._id) { //  修改
     let where = {'_id': ctx.request.body._id}

@@ -6,11 +6,13 @@ module.exports = {
   chainWebpack: () => {},
   configureWebpack: () => {},
   devServer: {
-    proxy: {
-      '*': {
-        target: 'http://58.37.57.242:3000',
-        changeOrigin: true
-      }
-    }
+    port: 10010,
+    // proxy: {
+    //   '*': {
+    //     target: 'http://58.37.57.242:3000',
+    //     changeOrigin: true
+    //   }
+    // }
   }
 }
+

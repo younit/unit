@@ -75,5 +75,17 @@ export default new Router({
         }
       ]
     },
+    {
+      path: '/task',
+      name: 'tasks',
+      component: () => import('./views/Home.vue'),
+      children: [
+        {
+          path: '/task',
+          name: 'task',
+          component: () => import('./views/task.vue')
+        }
+      ]
+    },
   ]
 })

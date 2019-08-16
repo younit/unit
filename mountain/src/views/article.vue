@@ -387,6 +387,9 @@ export default {
     &__content {
       margin-top 20px
       text-indent 2em
+      img {
+        width 100%
+      }
     }
   }
 }
