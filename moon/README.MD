@@ -1,5 +1,22 @@
 ## 更新日志 
 
+### 2019年08月16日17:16:16
+
+> 添加`task`接口, 实现以下功能:
+
+1. 对任务的`新增`
+2. 对任务的`编辑`
+3. 对任务的`删除`
+4. 对任务的`查询`
+```
+ctx.request.body.createDate = new Date(parseInt(ctx.request.body.createDate)).getTime()
+```
+
+> 备注
+
+  无
+
+
 ### 2019年08月06日16:54:35
 
 > 添加`product`接口, 实现以下功能:
