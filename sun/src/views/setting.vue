@@ -134,7 +134,6 @@ imgWidth = 75px
       max-width none
       height 100%
       border-radius 50px
-      width: imgWidth;
     }
     .van-button--normal {
       padding 0 10px

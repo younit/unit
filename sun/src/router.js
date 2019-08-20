@@ -8,7 +8,15 @@ export default new Router({
     {
       path: '/',
       name: 'app',
-      component: () => import('./views/home.vue')
+      component: () => import('./views/index.vue')
+    },
+    {
+      path: '/index',
+      name: 'index',
+      meta: {
+        keepAlive: true
+      },
+      component: () => import('./views/index.vue')
     },
     {
       path: '/home',

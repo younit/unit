@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="product">
      <template>
 
       <div class="txtright marginbtm30">
@@ -23,6 +23,12 @@
 
         <el-table-column label="描述">
           <template slot-scope="scope">{{ scope.row.desc }}</template>
+        </el-table-column>
+
+         <el-table-column label="标签">
+          <template slot-scope="scope">
+            <el-tag type="danger">{{ scope.row.label? scope.row.label: '无' }}</el-tag>
+          </template>
         </el-table-column>
 
         <el-table-column label="收藏">
@@ -82,6 +88,10 @@
             <el-input v-model.number="form.price"></el-input>
           </el-form-item>
 
+          <el-form-item label="标签"  :label-width="rules.width">
+            <el-input v-model="form.label"></el-input>
+          </el-form-item>
+
           <el-form-item label="商品封面" prop="img" :label-width="rules.width">
           <el-upload
             class="avatar-uploader"
@@ -97,7 +107,7 @@
           </el-form-item>
 
           <el-form-item label="商品介绍" :label-width="rules.width">
-            <el-input v-model="form.desc" clearable></el-input>
+            <el-input v-model="form.desc" clearable type="textarea" :rows="4"></el-input>
           </el-form-item>
 
         </el-form>
@@ -313,39 +323,42 @@ export default {
 
 }
 </script>
-<style lang="stylus" scoped>
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-  border-color: #409EFF;
-}
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 100px;
-  height: 100px;
-  border: 1px solid #ccc
-  line-height: 100px;
-  text-align: center;
-}
-.avatar {
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-  display: block;
-}
-.headimg {
-  width 20px
-  height 20px
-}
-.previewImg {
-  display: inherit 
-  margin  0 auto
-  width 100%
-}
+<style lang="stylus">
+#product
+  .el-table .cell
+    max-height 50px
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc
+    line-height: 100px;
+    text-align: center;
+  }
+  .avatar {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    display: block;
+  }
+  .headimg {
+    width 20px
+    height 20px
+  }
+  .previewImg {
+    display: inherit 
+    margin  0 auto
+    width 100%
+  }
 </style>

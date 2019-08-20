@@ -23,23 +23,23 @@ export default {
   name: 'navItem',
   data () {
     return {
-      active: 'home',
+      active: 'index',
       list: [
         {
           part: '首页',
           icon: 'fire-o',
           active_icon: 'fire',
-          path: 'home',
+          path: 'index',
           dot: true,
         },
-        {
-          part: '坐标',
-          icon: 'location-o',
-          active_icon: 'location',
-          path: 'location',
-          dot: false,
-          info: 99,
-        },
+        // {
+        //   part: '坐标',
+        //   icon: 'location-o',
+        //   active_icon: 'location',
+        //   path: 'location',
+        //   dot: false,
+        //   info: 99,
+        // },
         {
           part: '热点',
           icon: 'hot-o',

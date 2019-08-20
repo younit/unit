@@ -9,6 +9,7 @@ const procutSchema = new Schema({
   "collections" : Number, //  "收藏", 
   "read" : String, //  "浏览", 
   "createDate" : String, //  "创建时间", 
+  "label": String, //  标签
 })
 
 module.exports = mongoose.model('product', procutSchema)
